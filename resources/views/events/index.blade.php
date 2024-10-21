@@ -32,6 +32,7 @@
             @endforeach
             </tbody>
         </table>
+        {{ $events->appends(['per_page' => $perPage])->links() }}
     @endif
 </div>
 </body>
