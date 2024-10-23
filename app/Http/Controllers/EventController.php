@@ -30,9 +30,10 @@ class EventController extends Controller
 
 
         // TODO allow to create events without descriptions
+        // TODO handle sql exceptions nicely
 
         $req->validate([
-            'name' => 'required|max:2',
+            'name' => 'required|max:255',
             'start_date' => 'required|date',
             'end_date' => 'required|date|after_or_equal:start_date',
             'description' => 'string',
@@ -57,4 +58,31 @@ class EventController extends Controller
         return redirect()->route('events.index');
     }
 
+    public function edit(Event $event)
+    {
+        // Return the edit view with the event details
+        return view('events.edit', compact('event'));
+    }
+
+    public function update(Request $request, Event $event)
+    {
+
+        $request->validate([
+            'name' => 'required|string|max:255',
+            'start_date' => 'required|date',
+            'end_date' => 'required|date|after_or_equal:start_date',
+            'description' => 'nullable|string',
+            'image_url' => 'nullable|url',
+        ]);
+
+        $event->update([
+            'name' => $request->input('name'),
+            'start_date' => $request->input('start_date'),
+            'end_date' => $request->input('end_date'),
+            'description' => $request->input('description'),
+            'image_url' => $request->input('image_url'),
+        ]);
+
+        return redirect()->route('events.index');
+    }
 }

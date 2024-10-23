@@ -34,6 +34,8 @@
                     <td>{{ $event->end_date }}</td>
                     <td>{{ $event->description }}</td>
                     <td>
+                        <a href="{{ route('events.edit', $event->id) }}" class="btn btn-warning">Edit</a>
+
                         <form action="{{ route('events.delete', $event->id) }}" method="POST">
                             @csrf
                             @method('DELETE')
