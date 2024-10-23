@@ -22,6 +22,7 @@
                 <th>Start Date</th>
                 <th>End Date</th>
                 <th>Description</th>
+                <th>Actions</th>
             </tr>
             </thead>
             <tbody>
@@ -32,6 +33,13 @@
                     <td>{{ $event->start_date }}</td>
                     <td>{{ $event->end_date }}</td>
                     <td>{{ $event->description }}</td>
+                    <td>
+                        <form action="{{ route('events.delete', $event->id) }}" method="POST">
+                            @csrf
+                            @method('DELETE')
+                            <button type="submit" class="btn btn-danger">Delete</button>
+                        </form>
+                    </td>
                 </tr>
             @endforeach
             </tbody>

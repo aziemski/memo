@@ -50,4 +50,11 @@ class EventController extends Controller
         return redirect()->route('events.index');
     }
 
+    public function delete(Event $event)
+    {
+        $event->delete();
+
+        return redirect()->route('events.index');
+    }
+
 }

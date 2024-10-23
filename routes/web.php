@@ -15,3 +15,4 @@ Route::get('/hello', function () {
 Route::get('/events',[EventController::class,'index'])->name('events.index');
 Route::get('/events/create',[EventController::class,'create'])->name('events.create');
 Route::post('/events/store',[EventController::class,'store'])->name('events.store');
+Route::delete('/events/delete/{event}',[EventController::class,'delete'])->name('events.delete');
