@@ -15,6 +15,7 @@
         <table class="table table-striped">
             <thead>
             <tr>
+                <th>ID</th>
                 <th>Event Name</th>
                 <th>Start Date</th>
                 <th>End Date</th>
@@ -24,6 +25,7 @@
             <tbody>
             @foreach($events as $event)
                 <tr>
+                    <td>{{ $event->id }}</td>
                     <td>{{ $event->name }}</td>
                     <td>{{ $event->start_date }}</td>
                     <td>{{ $event->end_date }}</td>
