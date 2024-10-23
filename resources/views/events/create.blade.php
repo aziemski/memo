@@ -9,7 +9,6 @@
 <div class="container">
     <h2>Create New Event</h2>
 
-    <!-- Display validation errors -->
     @if ($errors->any())
         <div class="alert alert-danger">
             <ul>

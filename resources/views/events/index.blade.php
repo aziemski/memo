@@ -9,7 +9,9 @@
 <div class="container">
     <h2>All Events</h2>
 
-    @if($events->isEmpty())
+    <a href="{{ route('events.create') }}" class="btn btn-success mb-4">Create New Event</a>
+
+@if($events->isEmpty())
         <p>No events found.</p>
     @else
         <table class="table table-striped">
