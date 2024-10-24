@@ -13,9 +13,19 @@ Route::get('/hello', function () {
 
 
 Route::get('/events',[EventController::class,'index'])->name('events.index');
+
+// Create
 Route::get('/events/create',[EventController::class,'create'])->name('events.create');
 Route::post('/events/store',[EventController::class,'store'])->name('events.store');
-Route::delete('/events/delete/{event}',[EventController::class,'delete'])->name('events.delete');
 
+// Retrieve
+Route::get('/events/{event}',[EventController::class,'show'])->name('events.show');
+
+// Update
 Route::get('/events/{event}/edit',[EventController::class,'edit'])->name('events.edit');
 Route::put('/events/{event}',[EventController::class,'update'])->name('events.update');
+
+// Delete
+Route::delete('/events/delete/{event}',[EventController::class,'delete'])->name('events.delete');
+
+

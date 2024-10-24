@@ -85,4 +85,8 @@ class EventController extends Controller
 
         return redirect()->route('events.index');
     }
+    public function show(Event $event)
+    {
+        return view('events.show', compact('event'));
+    }
 }
