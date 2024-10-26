@@ -1,11 +1,6 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Event Details</title>
-</head>
-<body>
+@extends('layouts.app')
+
+@section('content')
 <div class="container">
     <h2>Event Details</h2>
 
@@ -24,5 +19,4 @@
 
     <a href="{{ route('events.index') }}" class="btn btn-secondary mt-3">Back to Events</a>
 </div>
-</body>
-</html>
+@endsection
