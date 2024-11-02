@@ -4,16 +4,9 @@ use App\Http\Controllers\EventController;
 use Illuminate\Support\Facades\Route;
 
 
-Route::get('/',[EventController::class,'index'])->name('index');
-Route::get('/timeline',[EventController::class,'timeline'])->name('timeline');
 
+Route::get('/',[EventController::class,'home'])->name('home');
 
-Route::get('/hello', function () {
-    return view('hello');
-});
-
-
-Route::get('/events',[EventController::class,'index'])->name('events.index');
 
 // Create
 Route::get('/events/create',[EventController::class,'create'])->name('events.create');

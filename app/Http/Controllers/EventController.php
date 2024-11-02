@@ -10,7 +10,7 @@ use Illuminate\Support\Facades\Log;
 class EventController extends Controller
 {
 
-    public function timeline(Request $req)
+    public function home(Request $req)
     {
         $events = Event::orderBy('start_date', 'asc')->get()->map(function ($event) {
             $startDate = Carbon::parse($event->start_date);
@@ -43,14 +43,9 @@ class EventController extends Controller
             return $formattedEvent;
         });
 
-        return view('timeline', compact('events'));
+        return view('home', compact('events'));
     }
-    public function index(Request $req)
-    {
-        $perPage = $req->input('per_page', 100);
-        $events = Event::orderBy('start_date', 'asc')->paginate($perPage);
-        return view('events.index', compact('events', 'perPage'));
-    }
+
 
     public function create(Request $req)
     {
@@ -83,14 +78,14 @@ class EventController extends Controller
             'image_url' => $req->input('image_url'),
         ]);
 
-        return redirect()->route('events.index');
+        return redirect()->route('home');
     }
 
     public function delete(Event $event)
     {
         $event->delete();
 
-        return redirect()->route('events.index');
+        return redirect()->route('home');
     }
 
     public function edit(Event $event)
@@ -118,10 +113,6 @@ class EventController extends Controller
             'image_url' => $request->input('image_url'),
         ]);
 
-        return redirect()->route('events.index');
-    }
-    public function show(Event $event)
-    {
-        return view('events.show', compact('event'));
+        return redirect()->route('home');
     }
 }
