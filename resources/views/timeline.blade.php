@@ -7,52 +7,48 @@
     <title>Timeline</title>
 </head>
 <body>
+<nav class="navbar">
+    <a href="#">Home</a>
+    <a href="#" class="btn ">+ Add Event</a>
+
+    <div class="dropdown">
+        <button class="btn outline">Filter</button>
+        <div class="dropdown-menu">
+            <label class="dropdown-item">
+                <input type="checkbox" name="categories" value="all"> All
+            </label>
+            <label class="dropdown-item">
+                <input type="checkbox" name="categories" value="technology"> Technology
+            </label>
+            <label class="dropdown-item">
+                <input type="checkbox" name="categories" value="health"> Health
+            </label>
+            <label class="dropdown-item">
+                <input type="checkbox" name="categories" value="science"> Science
+            </label>
+            <label class="dropdown-item">
+                <input type="checkbox" name="categories" value="business"> Business
+            </label>
+        </div>
+    </div>
+
+
+    <a href="/login" class="btn outline right">Login</a>
+</nav>
     <main>
         <div id="timeline-embed"></div>
         <script>
-            let timelineData;
-
-            document.addEventListener("DOMContentLoaded", function() {
-                timelineData = {
-                    "title": {
-                        "text": {
-                            "headline": "My Timeline",
-                            "text": "This is a sample timeline."
-                        }
-                    },
-                    "events": @json($events)
-                };
-
-                const timeline = new Timeline("timeline-embed", timelineData);
-
-                timeline.on("loaded",function () {
-                    addEventClickHandlers();
-                });
-            });
-
-            function addEventClickHandlers() {
-                const timelineEvents = document.querySelectorAll(".tl-slide-content");
-
-                timelineEvents.forEach((eventElement, index) => {
-                    eventElement.addEventListener("click", function() {
-                        handleEventClick(index);
-                    });
-                });
+            const timelineData = {
+                "title": {
+                    "text": {
+                        "headline": "My Timeline",
+                        "text": "This is a sample timeline."
+                    }
+                },
+                "events": @json($events)
             };
-
-            function handleEventClick(eventIndex) {
-                const event = timelineData.events[eventIndex];
-                console.log("Clicked on event:", event.text.headline);
-                alert("You clicked on: " + event.id + ", unique_id: "  + event.unique_id);
-            }
-
-            function viewDetails(eventId) {
-                const event = timelineData.events[eventIndex];
-                console.log("ddddClicked on event:", event.text.headline);
-                window.location.href = '/events/' + eventId +'/edit';
-            };
-
         </script>
 </main>
+    @vite(['resources/js/timeline.js'])
 </body>
 </html>

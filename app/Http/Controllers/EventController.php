@@ -12,7 +12,7 @@ class EventController extends Controller
 
     public function timeline(Request $req)
     {
-        $events = Event::all()->map(function ($event) {
+        $events = Event::orderBy('start_date', 'asc')->get()->map(function ($event) {
             $startDate = Carbon::parse($event->start_date);
             $endDate = Carbon::parse($event->end_date);
 
@@ -31,7 +31,7 @@ class EventController extends Controller
                 ],
                 "text" => [
                     "headline" => $event->name,
-                    "text" => $event->description . '<br><a href="/events/' . $event->id . '/edit" >View Details</a>'
+                    "text" => $event->description . '<br/><br/><a href="/events/' . $event->id . '/edit" target="_self" class="btn outline">Edit</a>'
                 ]
             ];
 
