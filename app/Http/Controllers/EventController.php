@@ -3,16 +3,51 @@
 namespace App\Http\Controllers;
 
 use App\Models\Event;
+use Carbon\Carbon;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Log;
 
 class EventController extends Controller
 {
 
+    public function timeline(Request $req)
+    {
+        $events = Event::all()->map(function ($event) {
+            $startDate = Carbon::parse($event->start_date);
+            $endDate = Carbon::parse($event->end_date);
+
+            $formattedEvent = [
+                "id" => $event->id,
+                "unique_id" => $event->id,
+                "start_date" => [
+                    "year" => $startDate->format('Y'),
+                    "month" => $startDate->format('m'),
+                    "day" => $startDate->format('d')
+                ],
+                "end_date" => [
+                    "year" => $endDate->format('Y'),
+                    "month" => $endDate->format('m'),
+                    "day" => $endDate->format('d')
+                ],
+                "text" => [
+                    "headline" => $event->name,
+                    "text" => $event->description . '<br><a href="/events/' . $event->id . '/edit" >View Details</a>'
+                ]
+            ];
+
+            if (!empty($event->image_url)) {
+                $formattedEvent["media"] = [
+                    "url" => $event->image_url
+                ];
+            }
+            return $formattedEvent;
+        });
+
+        return view('timeline', compact('events'));
+    }
     public function index(Request $req)
     {
-        Log::info("events.index", ['req'=>$req->url()]);
-        $perPage = $req->input('per_page', 10);
+        $perPage = $req->input('per_page', 100);
         $events = Event::orderBy('start_date', 'asc')->paginate($perPage);
         return view('events.index', compact('events', 'perPage'));
     }

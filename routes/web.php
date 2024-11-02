@@ -3,9 +3,10 @@
 use App\Http\Controllers\EventController;
 use Illuminate\Support\Facades\Route;
 
-Route::get('/', function () {
-    return view('welcome');
-});
+
+Route::get('/',[EventController::class,'index'])->name('index');
+Route::get('/timeline',[EventController::class,'timeline'])->name('timeline');
+
 
 Route::get('/hello', function () {
     return view('hello');

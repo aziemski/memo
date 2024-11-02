@@ -44,7 +44,21 @@
                 @endforeach
                 </tbody>
             </table>
-            {{ $events->appends(['per_page' => $perPage])->links() }}
+
+            <section class="timeline">
+                <ul>
+                    @foreach($events as $event)
+                    <li>
+                        <div>
+                            <time>
+                                {{ $event->start_date }} {{ $event->name }}
+                            </time>
+                            {{ $event->description }}
+                        </div>
+                    </li>
+                    @endforeach
+                </ul>
+            </section>
         @endif
     </div>
 @endsection
