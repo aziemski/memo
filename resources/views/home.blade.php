@@ -13,5 +13,7 @@
             "events": @json($events)
         };
     </script>
+
     @vite(['resources/js/timeline.js'])
+
 @endsection
