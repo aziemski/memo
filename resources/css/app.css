@@ -6,19 +6,15 @@
 
 :root {
     --primary-color: #333;
-    --secondary-color: #f5f5f5;
-    --primary-text-color: #fff;
-    --secondary-text-color: #333;
+    --primary-text-color: #FFF;
     --hover-primary-color: #555;
-    --hover-secondary-color: #e0e0e0;
 
-    --accent-color-secondary: #C9A227;
-    --accent-color: #4A4A4A;
+    --accent-color: #C9A227;
     --base-color: #FFFFFF;
     --text-color: #1A1A1A;
     --input-color: #E5E5E5;
     --highlight-color: #CCCCCC;
-    --error-color: #f06272;
+    --error-color: #F06272;
 }
 
 html{
@@ -73,17 +69,6 @@ main {
 .btn:hover {
     background-color: var(--hover-primary-color);
     color: #ddd;
-}
-
-.btn.light {
-    background-color: var(--secondary-color);
-    color: var(--secondary-text-color);
-    border-radius: 20px;
-}
-
-.btn.light:hover {
-    background-color: var(--hover-secondary-color);
-    color: #000;
 }
 
 .btn.outline {
@@ -176,6 +161,29 @@ main {
     margin-left: auto;
 }
 
+form button {
+    margin-top: 10px;
+    border: none;
+    border-radius: 1000px;
+    padding: 0.85em 4em;
+    background-color: var(--primary-color);
+    color: var(--primary-text-color);
+    font: inherit;
+    font-weight: 600;
+    text-transform: uppercase;
+    cursor: pointer;
+    transition: 150ms ease;
+}
+
+form button:hover {
+    background-color: var(--text-color);
+}
+
+form button:focus {
+    outline: none;
+    background-color: var(--text-color);
+}
+
 .auth-container {
     box-sizing: border-box;
     background-color: var(--base-color);
@@ -193,7 +201,7 @@ main {
     font-size: 3rem;
     font-weight: 900;
     text-transform: uppercase;
-    color: var(--accent-color);
+    color: var(--primary-color);
 }
 
 .auth-container form {
@@ -216,7 +224,7 @@ main {
     flex-shrink: 0;
     height: 50px;
     width: 50px;
-    background-color: var(--accent-color);
+    background-color: var(--primary-color);
     fill: var(--base-color);
     color: var(--base-color);
     border-radius: 10px 0 0 10px;
@@ -242,48 +250,25 @@ main {
 }
 
 .auth-container form input:hover {
-    border-color: var(--accent-color);
+    border-color: var(--primary-color);
 }
 
 .auth-container form input:focus {
     outline: none;
-    border-color: var(--text-color);
+    border-color: var(--primary-color);
 }
 
 .auth-container div:has(input:focus) > label {
-    background-color: var(--text-color);
+    background-color: var(--primary-color);
 }
 
 .auth-container form input::placeholder {
-    color: var(--text-color);
-}
-
-.auth-container form button {
-    margin-top: 10px;
-    border: none;
-    border-radius: 1000px;
-    padding: 0.85em 4em;
-    background-color: var(--accent-color);
-    color: var(--base-color);
-    font: inherit;
-    font-weight: 600;
-    text-transform: uppercase;
-    cursor: pointer;
-    transition: 150ms ease;
-}
-
-.auth-container form button:hover {
-    background-color: var(--text-color);
-}
-
-.auth-container form button:focus {
-    outline: none;
-    background-color: var(--text-color);
+    color: var(--primary-color);
 }
 
 .auth-container a {
     text-decoration: none;
-    color: var(--accent-color-secondary);
+    color: var(--accent-color);
 }
 
 .auth-container a:hover {
