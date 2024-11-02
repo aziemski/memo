@@ -9,7 +9,6 @@
 <body>
     <main>
         <div id="timeline-embed"></div>
-        <script src="https://cdn.knightlab.com/libs/timeline3/latest/js/timeline.js"></script>
         <script>
             let timelineData;
 
@@ -24,8 +23,7 @@
                     "events": @json($events)
                 };
 
-                var timeline = new TL.Timeline("timeline-embed", timelineData
-                );
+                const timeline = new Timeline("timeline-embed", timelineData);
 
                 timeline.on("loaded",function () {
                     addEventClickHandlers();
