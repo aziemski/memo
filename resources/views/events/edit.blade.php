@@ -36,8 +36,9 @@
 
 
         <div class="button-group">
+            <button type="submit" class="btn outline" name="action" value="delete">Delete</button>
             <button type="button" class="btn outline" onclick="window.location='{{ url()->previous() }}'">Cancel</button>
-            <button type="submit" class="btn">Save</button>
+            <button type="submit" class="btn" name="action" value="save">Save</button>
         </div>
     </form>
 </div>

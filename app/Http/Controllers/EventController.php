@@ -89,7 +89,6 @@ class EventController extends Controller
 
         return redirect()->route('home');
     }
-
     public function delete(Event $event)
     {
         $event->delete();
@@ -99,12 +98,15 @@ class EventController extends Controller
 
     public function edit(Event $event)
     {
-        // Return the edit view with the event details
         return view('events.edit', compact('event'));
     }
 
     public function update(Request $request, Event $event)
     {
+        if ($request->input('action') === 'delete') {
+            $event->delete();
+            return redirect()->route('home');
+        }
 
         $request->validate([
             'name' => 'required|string|max:255',
