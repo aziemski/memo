@@ -3,13 +3,23 @@
 namespace App\Http\Controllers;
 
 use App\Models\User;
-use Illuminate\Http\Request;
+
+use Illuminate\Support\Facades\Auth;
 
 class UserController extends Controller
 {
-    public function get(Request $req)
+    public function allShow()
     {
         $users = User::all();
+
         return Response()->json($users);
+    }
+
+    public function meShow()
+    {
+        $userId = Auth::id();
+        $user = User::find($userId);
+
+        return view('users.profile', compact('user'));
     }
 }

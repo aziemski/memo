@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\Event;
 use Carbon\Carbon;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Log;
 
 class EventController extends Controller
@@ -12,9 +13,17 @@ class EventController extends Controller
 
     public function home(Request $req)
     {
-        $events = Event::orderBy('start_date', 'asc')->get()->map(function ($event) {
+        $logged = Auth::check();
+
+        $events = Event::orderBy('start_date', 'asc')->get()->map(function ($event) use ($logged) {
             $startDate = Carbon::parse($event->start_date);
             $endDate = Carbon::parse($event->end_date);
+
+            $text =  $event->description;
+
+            if ($logged) {
+                $text = $text . '<br/><br/><a href="/events/' . $event->id . '/edit" target="_self" class="btn outline">Edit</a>';
+            }
 
             $formattedEvent = [
                 "id" => $event->id,
@@ -31,7 +40,7 @@ class EventController extends Controller
                 ],
                 "text" => [
                     "headline" => $event->name,
-                    "text" => $event->description . '<br/><br/><a href="/events/' . $event->id . '/edit" target="_self" class="btn outline">Edit</a>'
+                    "text" => $text
                 ]
             ];
 

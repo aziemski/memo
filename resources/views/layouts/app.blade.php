@@ -27,7 +27,9 @@
             </svg>
         </a>
 
-        <a href="/events/create" class="btn">+ Add Event</a>
+        @auth
+        <a href="{{ route('events.create') }}" class="btn">+ Add Event</a>
+        @endauth
 
         <div class="dropdown">
             <button class="btn outline">Filter</button>
@@ -50,8 +52,11 @@
             </div>
         </div>
 
-
-        <a href="/login" class="btn outline right">Login</a>
+        @if (Auth::check())
+            <a href="{{ route('users.me') }}" class="btn outline right">Me</a>
+        @else
+            <a href="{{ route('login') }}" class="btn outline right">Login</a>
+        @endif
     </nav>
     <main>
         @yield('content')

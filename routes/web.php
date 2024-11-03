@@ -7,14 +7,14 @@ use Illuminate\Support\Facades\Route;
 
 
 // Auth
-Route::get('/login',[AuthController::class,'loginShow'])->name('loginShow');
-Route::post('/login',[AuthController::class,'login'])->name('login');
+Route::get('/login',[AuthController::class,'loginShow'])->name('login');
+Route::post('/login',[AuthController::class,'login'])->name('login.store');
 Route::post('/logout',[AuthController::class,'logout'])->name('logout');
 
-Route::get('/signup',[AuthController::class,'signupShow'])->name('signupShow');
-Route::post('/signup',[AuthController::class,'signup'])->name('signup');
+Route::get('/signup',[AuthController::class,'signupShow'])->name('signup');
+Route::post('/signup',[AuthController::class,'signup'])->name('signup.store');
 
-Route::get('/users',[UserController::class,'get'])->name('users');
+
 
 Route::get('/',[EventController::class,'home'])->name('home');
 
@@ -27,14 +27,7 @@ Route::middleware(['auth'])->group(function () {
     Route::put('/events/{event}',[EventController::class,'update'])->name('events.update');
 
     Route::delete('/events/delete/{event}',[EventController::class,'delete'])->name('events.delete');
+
+    Route::get('/users',[UserController::class,'allShow'])->name('users');
+    Route::get('/users/me',[UserController::class,'meShow'])->name('users.me');
 });
-
-
-
-
-
-
-
-
-
-
