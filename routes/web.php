@@ -2,13 +2,19 @@
 
 use App\Http\Controllers\AuthController;
 use App\Http\Controllers\EventController;
+use App\Http\Controllers\UserController;
 use Illuminate\Support\Facades\Route;
 
 
 // Auth
-Route::get('/login',[AuthController::class,'login'])->name('login');
-Route::get('/signup',[AuthController::class,'signup'])->name('signup');
+Route::get('/login',[AuthController::class,'showLogin'])->name('showLogin');
+Route::post('/login',[AuthController::class,'login'])->name('login');
+Route::post('/logout',[AuthController::class,'logout'])->name('logout');
 
+Route::get('/signup',[AuthController::class,'showSignup'])->name('showSignup');
+Route::post('/signup',[AuthController::class,'signup'])->name('signup');
+
+Route::get('/users',[UserController::class,'get'])->name('users');
 
 Route::get('/',[EventController::class,'home'])->name('home');
 

@@ -4,7 +4,8 @@
     <div class="auth-container ">
         <h1>Login</h1>
         <p id="error-message"></p>
-        <form id="form">
+        <form id="form" action="{{ route('login') }}" method="POST">
+            @csrf
             <div>
                 <label for="email-input">
                     <span>@</span>
@@ -19,7 +20,7 @@
             </div>
             <button type="submit">Login</button>
         </form>
-        <p>New here? <a href="/signup">Create an Account</a></p>
+        <p>New here? <a href="{{ route('signup') }}">Create an Account</a></p>
     </div>
 
     @vite(['resources/js/auth.js'])
