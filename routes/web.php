@@ -7,11 +7,11 @@ use Illuminate\Support\Facades\Route;
 
 
 // Auth
-Route::get('/login',[AuthController::class,'showLogin'])->name('showLogin');
+Route::get('/login',[AuthController::class,'loginShow'])->name('loginShow');
 Route::post('/login',[AuthController::class,'login'])->name('login');
 Route::post('/logout',[AuthController::class,'logout'])->name('logout');
 
-Route::get('/signup',[AuthController::class,'showSignup'])->name('showSignup');
+Route::get('/signup',[AuthController::class,'signupShow'])->name('signupShow');
 Route::post('/signup',[AuthController::class,'signup'])->name('signup');
 
 Route::get('/users',[UserController::class,'get'])->name('users');
@@ -19,18 +19,22 @@ Route::get('/users',[UserController::class,'get'])->name('users');
 Route::get('/',[EventController::class,'home'])->name('home');
 
 
-// Create
-Route::get('/events/create',[EventController::class,'create'])->name('events.create');
-Route::post('/events/store',[EventController::class,'store'])->name('events.store');
+Route::middleware(['auth'])->group(function () {
+    Route::get('/events/create',[EventController::class,'create'])->name('events.create');
+    Route::post('/events/store',[EventController::class,'store'])->name('events.store');
 
-// Retrieve
-Route::get('/events/{event}',[EventController::class,'show'])->name('events.show');
+    Route::get('/events/{event}/edit',[EventController::class,'edit'])->name('events.edit');
+    Route::put('/events/{event}',[EventController::class,'update'])->name('events.update');
 
-// Update
-Route::get('/events/{event}/edit',[EventController::class,'edit'])->name('events.edit');
-Route::put('/events/{event}',[EventController::class,'update'])->name('events.update');
+    Route::delete('/events/delete/{event}',[EventController::class,'delete'])->name('events.delete');
+});
 
-// Delete
-Route::delete('/events/delete/{event}',[EventController::class,'delete'])->name('events.delete');
+
+
+
+
+
+
+
 
 
