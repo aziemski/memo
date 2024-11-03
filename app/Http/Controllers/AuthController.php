@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 
 
 class AuthController extends Controller
@@ -12,9 +13,21 @@ class AuthController extends Controller
     {
         return view('auth.login');
     }
-    public function login(Request $req)
+    public function login(Request $request)
     {
-        return redirect('/');
+        $request->validate([
+            'email' => 'required|email',
+            'password' => 'required',
+        ]);
+
+        if (Auth::attempt($request->only('email', 'password'))) {
+            $request->session()->regenerate();
+            return redirect()->intended('/')->with('success', 'Login Successful');
+        }
+
+        return back()->withErrors([
+            'email' => 'The provided credentials do not match our records.',
+        ]);
     }
 
     public function showSignup(Request $req)
