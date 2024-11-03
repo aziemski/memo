@@ -33,7 +33,7 @@
         <input type="url" id="image_url" name="image_url">
 
         <div class="button-group">
-            <button type="button" class="btn outline">Cancel</button>
+            <button type="button" class="btn outline" onclick="window.location='{{ url()->previous() }}'">Cancel</button>
             <button type="submit" class="btn">Save</button>
         </div>
 
