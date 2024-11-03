@@ -1,27 +1,29 @@
 <?php
 
 namespace App\Http\Controllers;
+use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Hash;
 
 
 class AuthController extends Controller
 {
 
 
-    public function showLogin(Request $req)
+    public function showLogin()
     {
         return view('auth.login');
     }
-    public function login(Request $request)
+    public function login(Request $req)
     {
-        $request->validate([
+        $req->validate([
             'email' => 'required|email',
             'password' => 'required',
         ]);
 
-        if (Auth::attempt($request->only('email', 'password'))) {
-            $request->session()->regenerate();
+        if (Auth::attempt($req->only('email', 'password'))) {
+            $req->session()->regenerate();
             return redirect()->intended('/')->with('success', 'Login Successful');
         }
 
@@ -37,6 +39,20 @@ class AuthController extends Controller
 
     public function signup(Request $req)
     {
-        return redirect()->route('home');
+        $req->validate([
+            'name' => 'required|string|max:255',
+            'email' => 'required|string|email|max:255|unique:users',
+            'password' => 'required|string|min:8|confirmed',
+        ]);
+
+        $user = User::create([
+            'name' => $req->name,
+            'email' => $req->email,
+            'password' => Hash::make($req->password),
+        ]);
+
+        Auth::login($user);
+
+        return redirect()->intended('/');
     }
 }
