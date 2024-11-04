@@ -16,4 +16,9 @@ class Event extends Model
         , 'description'
         , 'image_url'
     ];
+
+    public function categories()
+    {
+        return $this->belongsToMany(Category::class);
+    }
 }

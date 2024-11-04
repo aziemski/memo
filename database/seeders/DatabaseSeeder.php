@@ -2,10 +2,12 @@
 
 namespace Database\Seeders;
 
+use App\Models\Category;
 use App\Models\Event;
 use App\Models\User;
 // use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 use Illuminate\Database\Seeder;
+use Illuminate\Support\Facades\Hash;
 
 class DatabaseSeeder extends Seeder
 {
@@ -14,13 +16,41 @@ class DatabaseSeeder extends Seeder
      */
     public function run(): void
     {
-        // User::factory(10)->create();
 
-        User::factory()->create([
-            'name' => 'Test User',
-            'email' => 'test@example.com',
+        User::insert([
+            [
+                'name' => 'Test User',
+                'email' => 'test@example.com',
+                'password' => Hash::make('asdfasdf'),
+            ]
         ]);
 
-        Event::factory()->count(100)->create();
+        Event::factory()->count(10)->create();
+
+        Category::insert([
+            [
+                'name' => 'Technology',
+                'color' => '#3498db'
+            ],
+            [
+                'name' => 'Health',
+                'color' => '#2ecc71'
+            ],
+            [
+                'name' => 'Education',
+                'color' => '#e74c3c'
+            ],
+            [
+                'name' => 'Sports',
+                'color' => '#f1c40f'],
+            [
+                'name' => 'Travel',
+                'color' => null
+            ],
+            [
+                'name' => 'Food',
+                'color' => '#8e44ad'
+            ],
+        ]);
     }
 }
