@@ -36,20 +36,13 @@
             <button class="btn outline">Filter</button>
             <div class="dropdown-menu">
                 <label class="dropdown-item">
-                    <input type="checkbox" name="categories" value="all"> All
+                    <input type="checkbox" name="categories" value="all">All
                 </label>
+                @foreach($categories as $category)
                 <label class="dropdown-item">
-                    <input type="checkbox" name="categories" value="technology"> Technology
+                    <input type="checkbox" name="categories" value="{{ $category->id}}">{{ $category->name }}
                 </label>
-                <label class="dropdown-item">
-                    <input type="checkbox" name="categories" value="health"> Health
-                </label>
-                <label class="dropdown-item">
-                    <input type="checkbox" name="categories" value="science"> Science
-                </label>
-                <label class="dropdown-item">
-                    <input type="checkbox" name="categories" value="business"> Business
-                </label>
+                @endforeach
             </div>
         </div>
        @endif

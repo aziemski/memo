@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Category;
 use App\Models\Event;
 use Carbon\Carbon;
 use Illuminate\Http\Request;
@@ -52,7 +53,9 @@ class EventController extends Controller
             return $formattedEvent;
         });
 
-        return view('home', compact('events'));
+        $categories = Category::orderBy('name', 'asc')->get();
+
+        return view('home', compact('events', 'categories'));
     }
 
 

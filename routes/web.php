@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\AuthController;
+use App\Http\Controllers\CategoryController;
 use App\Http\Controllers\EventController;
 use App\Http\Controllers\UserController;
 use Illuminate\Support\Facades\Route;
@@ -18,6 +19,7 @@ Route::post('/signup',[AuthController::class,'signup'])->name('signup.store');
 
 Route::get('/',[EventController::class,'home'])->name('home');
 
+Route::get('/categories',[CategoryController::class,'categories'])->name('categories');
 
 Route::middleware(['auth'])->group(function () {
     Route::get('/events/create',[EventController::class,'create'])->name('events.create');
