@@ -34,6 +34,11 @@
         <label for="image_url">Image URL:</label>
         <input type="url" id="image_url" name="image_url" value="{{ old('image_url', $event->image_url) }}">
 
+        @foreach ($categories as $category)
+        <label>{{ $category->name }}</label>
+        <input type="checkbox" name="categories[]" value="{{ $category->id }}"
+                    {{ $event->categories->contains($category->id) ? 'checked' : '' }}>
+        @endforeach
 
         <div class="button-group">
             <button type="submit" class="btn outline" name="action" value="delete">Delete</button>

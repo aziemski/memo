@@ -101,7 +101,8 @@ class EventController extends Controller
 
     public function edit(Event $event)
     {
-        return view('events.edit', compact('event'));
+        $categories = Category::orderBy('name', 'asc')->get();
+        return view('events.edit', compact('event', 'categories'));
     }
 
     public function update(Request $request, Event $event)
@@ -117,6 +118,8 @@ class EventController extends Controller
             'end_date' => 'required|date|after_or_equal:start_date',
             'description' => 'nullable|string',
             'image_url' => 'nullable|url',
+            'categories' => 'nullable|array',
+            'categories.*' => 'exists:categories,id'
         ]);
 
         $event->update([
@@ -126,6 +129,8 @@ class EventController extends Controller
             'description' => $request->input('description'),
             'image_url' => $request->input('image_url'),
         ]);
+
+        $event->categories()->sync($request->input('categories', []));
 
         return redirect()->route('home');
     }

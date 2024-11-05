@@ -17,17 +17,15 @@ class DatabaseSeeder extends Seeder
     public function run(): void
     {
 
-        User::insert([
-            [
-                'name' => 'Test User',
-                'email' => 'test@example.com',
-                'password' => Hash::make('asdfasdf'),
-            ]
+        User::create([
+            'name' => 'Test User',
+            'email' => 'test@example.com',
+            'password' => Hash::make('asdfasdf'),
         ]);
 
         Event::factory()->count(10)->create();
 
-        Category::insert([
+        $categories = [
             [
                 'name' => 'Technology',
                 'color' => '#3498db'
@@ -51,6 +49,11 @@ class DatabaseSeeder extends Seeder
                 'name' => 'Food',
                 'color' => '#8e44ad'
             ],
-        ]);
+        ];
+
+        foreach ($categories as $category) {
+            Category::create($category);
+        }
+
     }
 }
