@@ -59,18 +59,15 @@ class EventController extends Controller
     }
 
 
-    public function create(Request $req)
+    public function create()
     {
-        Log::info("events.create", ['req'=>$req]);
+        $categories = Category::all();
 
-        return view('events.create');
+        return view('events.create', compact('categories'));
     }
 
     public function store(Request $req)
     {
-        Log::info("events.store", ['req'=>$req->url()]);
-
-
         // TODO allow to create events without descriptions
         // TODO handle sql exceptions nicely
 
@@ -80,15 +77,19 @@ class EventController extends Controller
             'end_date' => 'required|date|after_or_equal:start_date',
             'description' => 'string',
             'image' => 'nullable|url',
+            'categories' => 'nullable|array',
+            'categories.*' => 'exists:categories,id'
         ]);
 
-        Event::create([
+        $event = Event::create([
             'name' => $req->input('name'),
             'start_date' => $req->input('start_date'),
             'end_date' => $req->input('end_date'),
             'description' => $req->input('description'),
             'image_url' => $req->input('image_url'),
         ]);
+
+        $event->categories()->sync($req->input('categories', []));
 
         return redirect()->route('home');
     }
