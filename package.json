@@ -12,6 +12,8 @@
         "vite": "^5.0"
     },
     "dependencies": {
-        "@knight-lab/timelinejs": "^3.9.3"
+        "@knight-lab/timelinejs": "^3.9.3",
+        "@popperjs/core": "^2.11.8",
+        "bootstrap": "^5.3.3"
     }
 }
