@@ -8,10 +8,10 @@
 
     <meta name="csrf-token" content="{{ csrf_token() }}">
 
-    @vite(['resources/css/app.css', 'resources/js/app.js'])
+    @vite(['resources/css/app.css', 'resources/js/app.js', 'resources/js/timeline.js'])
 </head>
 <body>
-    <nav class="navbar navbar-expand navbar-light bg-light">
+    <nav class="navbar navbar-expand navbar-light bg-light sticky-top">
         <div class="container">
             <a class="navbar-brand" href="{{ route('home') }}">
                 <svg width="24" height="24" viewBox="0 0 24 24" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
@@ -34,23 +34,34 @@
                     @endauth
                 </li>
 
-                <li class="nav-item dropdown">
-                    @if(Route::currentRouteName() === 'home')
-                        <a class="nav-link dropdown-toggle" href="#" id="categoryDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
-                            Filter
-                        </a>
-                            <div class="dropdown-menu" aria-labelledby="categoryDropdown">
-                                <label class="dropdown-item">
-                                    <input type="checkbox" name="categories" value="all">All
-                                </label>
-                                @foreach($categories as $category)
-                                    <label class="dropdown-item">
-                                        <input type="checkbox" name="categories" value="{{ $category->id}}">{{ $category->name }}
-                                    </label>
+                @if(Route::is('home'))
+                    <li class="nav-item dropdown">
+                        <form id="categoryForm" action="{{ route('home') }}" method="GET">
+                            <a class="nav-link dropdown-toggle" href="#" id="categoryDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                                Categories
+                            </a>
+
+                            <ul class="dropdown-menu p-3" aria-labelledby="categoryDropdown" style="min-width: 200px;" data-bs-auto-close="outside">
+                                @foreach ($categories as $category)
+                                    <li class="dropdown-item">
+                                        <div class="form-check">
+                                            <input class="form-check-input" type="checkbox" value="{{ $category->id }}" id="category{{ $category->id }}" name="categories[]"
+                                                {{ in_array($category->id, $selectedCategories) ? 'checked' : '' }}>
+                                            <label class="form-check-label" for="category{{ $category->id }}">{{ $category->name }}</label>
+                                        </div>
+                                    </li>
                                 @endforeach
-                            </div>
-                    @endif
-                </li>
+                                <li class="dropdown-divider"></li>
+
+                                <li class="d-flex justify-content-between px-2">
+                                    <a class="btn btn-sm btn-secondary" href="{{ route('home') }}">Clear</a>
+                                    <button type="submit" class="btn btn-sm btn-primary" id="applySelection">Apply</button>
+                                </li>
+                            </ul>
+                        </form>
+                    </li>
+                @endif
+
             </ul>
 
             <ul class="navbar-nav ms-auto">

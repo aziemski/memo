@@ -15,8 +15,21 @@ class EventController extends Controller
     public function home(Request $req)
     {
         $logged = Auth::check();
+        $selectedCategories = $req->query('categories', []);
 
-        $events = Event::orderBy('start_date', 'asc')->get()->map(function ($event) use ($logged) {
+        if (!empty($selectedCategories)) {
+            $events = Event::whereHas('categories', function ($query) use ($selectedCategories) {
+                $query->whereIn('categories.id', $selectedCategories);
+            })
+                ->orderBy('start_day', 'asc')
+                ->get();
+        } else {
+            $events = Event::orderBy('start_day', 'asc')
+                ->get();
+        }
+
+
+        $events = $events->map(function ($event) use ($logged) {
             $startDate = Carbon::parse($event->start_date);
             $endDate = Carbon::parse($event->end_date);
 
@@ -55,7 +68,11 @@ class EventController extends Controller
 
         $categories = Category::orderBy('name', 'asc')->get();
 
-        return view('home', compact('events', 'categories'));
+        return view('home', compact(
+            'events',
+            'categories',
+            'selectedCategories',
+        ));
     }
 
 
@@ -89,7 +106,8 @@ class EventController extends Controller
             'image_url' => $req->input('image_url'),
         ]);
 
-        $event->categories()->sync($req->input('categories', []));
+        $event->categories()
+            ->sync($req->input('categories', []));
 
         return redirect()->route('home');
     }
@@ -102,7 +120,8 @@ class EventController extends Controller
 
     public function edit(Event $event)
     {
-        $categories = Category::orderBy('name', 'asc')->get();
+        $categories = Category::orderBy('name', 'asc')
+            ->get();
         return view('events.edit', compact('event', 'categories'));
     }
 
@@ -131,7 +150,8 @@ class EventController extends Controller
             'image_url' => $request->input('image_url'),
         ]);
 
-        $event->categories()->sync($request->input('categories', []));
+        $event->categories()
+            ->sync($request->input('categories', []));
 
         return redirect()->route('home');
     }
