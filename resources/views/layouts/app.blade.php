@@ -28,9 +28,9 @@
             </a>
 
             <ul class="navbar-nav me-auto">
-                <li class="nav-item">
+                <li class="d-flex align-items-center">
                     @auth
-                        <a class="nav-link active" href="{{ route('events.create') }}">+ Add Event</a>
+                        <a class="btn btn-sm btn-primary" href="{{ route('events.create') }}">+ Add Event</a>
                     @endauth
                 </li>
 
@@ -75,7 +75,7 @@
             </ul>
         </div>
     </nav>
-<main>
+<main class="d-flex align-items-center justify-content-center min-vh-100">
     @yield('content')
 </main>
 </body>
