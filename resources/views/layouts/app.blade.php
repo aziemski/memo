@@ -53,7 +53,7 @@
                                 @endforeach
                                 <li class="dropdown-divider"></li>
 
-                                <li class="d-flex justify-content-between px-2">
+                                <li class="d-flex justify-content-end gap-2">
                                     <a class="btn btn-sm btn-secondary" href="{{ route('home') }}">Clear</a>
                                     <button type="submit" class="btn btn-sm btn-primary" id="applySelection">Apply</button>
                                 </li>

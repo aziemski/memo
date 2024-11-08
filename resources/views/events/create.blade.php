@@ -54,7 +54,7 @@
                 </div>
             </div>
 
-            <div class="d-flex justify-content-between">
+            <div class="d-flex justify-content-end gap-2">
                 <button type="button" class="btn btn-outline-secondary" onclick="window.location='{{ url()->previous() }}'">Cancel</button>
                 <button type="submit" class="btn btn-primary">Save</button>
             </div>
