@@ -38,7 +38,7 @@
                     <li class="nav-item dropdown">
                         <form id="categoryForm" action="{{ route('home') }}" method="GET">
                             <a class="nav-link dropdown-toggle" href="#" id="categoryDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
-                                Categories
+                                Filter
                             </a>
 
                             <ul class="dropdown-menu p-3" aria-labelledby="categoryDropdown" style="min-width: 200px;" data-bs-auto-close="outside">
@@ -75,7 +75,7 @@
             </ul>
         </div>
     </nav>
-<main class="d-flex align-items-center justify-content-center min-vh-100">
+<main class="container mt-0">
     @yield('content')
 </main>
 </body>

@@ -1,7 +1,7 @@
 @extends('layouts.app')
 
 @section('content')
-    <div class="container overflow-auto p-4">
+    <div class="container my-5">
         <h1 class="mb-4">New Event</h1>
 
         @if ($errors->any())
