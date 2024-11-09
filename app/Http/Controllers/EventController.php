@@ -21,10 +21,10 @@ class EventController extends Controller
             $events = Event::whereHas('categories', function ($query) use ($selectedCategories) {
                 $query->whereIn('categories.id', $selectedCategories);
             })
-                ->orderBy('start_day', 'asc')
+                ->orderBy('start_date', 'asc')
                 ->get();
         } else {
-            $events = Event::orderBy('start_day', 'asc')
+            $events = Event::orderBy('start_date', 'asc')
                 ->get();
         }
 
