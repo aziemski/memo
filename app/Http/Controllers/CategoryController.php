@@ -10,7 +10,8 @@ class CategoryController extends Controller
 
     public function categories()
     {
-        $categories = Category::orderBy('name', 'asc')->get();
+        $categories = Category::orderBy('name', 'asc')
+            ->get();
 
         return Response()->json($categories);
     }

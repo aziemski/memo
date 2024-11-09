@@ -28,7 +28,6 @@ class EventController extends Controller
                 ->get();
         }
 
-
         $events = $events->map(function ($event) use ($logged) {
             $startDate = Carbon::parse($event->start_date);
             $endDate = Carbon::parse($event->end_date);
@@ -63,6 +62,7 @@ class EventController extends Controller
                     "url" => $event->image_url
                 ];
             }
+
             return $formattedEvent;
         });
 
