@@ -57,6 +57,10 @@
                             </label>
                         </div>
                     @endforeach
+
+                    <div class="d-flex">
+                        <a href="{{ route('categories.index') }}" class="text-primary">Manage Categories</a>
+                    </div>
                 </div>
             </div>
             <div class="d-flex justify-content-end gap-2">
