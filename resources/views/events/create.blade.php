@@ -43,14 +43,23 @@
             </div>
 
             <div class="mb-3">
-                <label class="form-label">Categories:</label>
-                <div>
-                    @foreach ($categories as $category)
-                        <div class="form-check">
-                            <input type="checkbox" id="category{{ $category->id }}" name="categories[]" value="{{ $category->id }}" class="form-check-input">
-                            <label for="category{{ $category->id }}" class="form-check-label">{{ $category->name }}</label>
-                        </div>
-                    @endforeach
+                <div class="d-flex">
+                    <label class="form-label">Categories:</label>
+                </div>
+
+                @foreach ($categories as $category)
+                    <div class="form-check d-inline-block mb-2">
+                        <input type="checkbox" id="category{{ $category->id }}" name="categories[]" value="{{ $category->id }}" class="form-check-input">
+                        <label for="category{{ $category->id }}"
+                               class="badge rounded-pill {{ $category->color ? 'text-light' : 'text-dark' }}"
+                               @if ($category->color) style="background-color: {{ $category->color }}; padding: 8px;" @endif>
+                            {{ $category->name }}
+                        </label>
+                    </div>
+                @endforeach
+
+                <div class="d-flex">
+                    <a href="{{ route('categories.index') }}" class="text-primary">Manage Categories</a>
                 </div>
             </div>
 

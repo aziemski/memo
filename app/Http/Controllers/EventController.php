@@ -31,6 +31,22 @@ class EventController extends Controller
             $endDate = Carbon::parse($event->end_date);
 
             $text =  $event->description;
+            $categories = $event->categories;
+
+            if (!empty($categories)) {
+                $categoryBadges = $categories->map(function ($category) {
+                    $textColor = $category->color ? 'text-light' : 'text-dark';
+                    $backgroundStyle = $category->color ? "background-color: {$category->color}; padding: 8px;" : '';
+
+                    return <<<HTML
+                    <span class="badge rounded-pill $textColor" style="$backgroundStyle">
+                        {$category->name}
+                    </span>
+                HTML;
+                })->join(' ');
+
+                $text = $text . '<br/><br/>' . $categoryBadges;
+            }
 
             if ($logged) {
                 $text = $text . '<br/><br/><a href="/events/' . $event->id . '/edit" target="_self" class="btn outline">Edit</a>';
