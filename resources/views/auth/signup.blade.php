@@ -62,7 +62,4 @@
             <p class="text-center mt-4">Already have an Account? <a href="{{ route('login') }}">Login</a></p>
         </div>
     </div>
-
-    @vite(['resources/js/auth.js'])
-
 @endsection

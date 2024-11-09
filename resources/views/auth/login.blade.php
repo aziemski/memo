@@ -39,7 +39,4 @@
             <p class="text-center mt-4">New here? <a href="{{ route('signup') }}">Create an Account</a></p>
         </div>
     </div>
-
-    @vite(['resources/js/auth.js'])
-
 @endsection
