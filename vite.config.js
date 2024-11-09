@@ -6,9 +6,8 @@ export default defineConfig({
         laravel({
             input: [
                 'resources/css/app.css',
-                'resources/js/app.js',
-                'resources/js/auth.js',
                 'resources/js/bootstrap.js',
+                'resources/js/category.js',
                 'resources/js/timeline.js',
             ],
             refresh: true,
