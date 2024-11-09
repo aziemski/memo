@@ -49,7 +49,8 @@
 
                 @foreach ($categories as $category)
                     <div class="form-check d-inline-block mb-2">
-                        <input type="checkbox" id="category{{ $category->id }}" name="categories[]" value="{{ $category->id }}" class="form-check-input">
+                        <input type="checkbox" id="category{{ $category->id }}" name="categories[]"
+                               value="{{ $category->id }}" class="form-check-input">
                         <label for="category{{ $category->id }}"
                                class="badge rounded-pill {{ $category->color ? 'text-light' : 'text-dark' }}"
                                @if ($category->color) style="background-color: {{ $category->color }}; padding: 8px;" @endif>
@@ -64,7 +65,9 @@
             </div>
 
             <div class="d-flex justify-content-end gap-2">
-                <button type="button" class="btn btn-outline-secondary" onclick="window.location='{{ url()->previous() }}'">Cancel</button>
+                <button type="button" class="btn btn-outline-secondary"
+                        onclick="window.location='{{ url()->previous() }}'">Cancel
+                </button>
                 <button type="submit" class="btn btn-primary">Save</button>
             </div>
 

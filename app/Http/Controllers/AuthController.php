@@ -1,6 +1,7 @@
 <?php
 
 namespace App\Http\Controllers;
+
 use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
@@ -12,22 +13,6 @@ class AuthController extends Controller
     public function loginShow()
     {
         return view('auth.login');
-    }
-    public function login(Request $req)
-    {
-        $req->validate([
-            'email' => 'required|email',
-            'password' => 'required',
-        ]);
-
-        if (Auth::attempt($req->only('email', 'password'))) {
-            $req->session()->regenerate();
-            return redirect()->intended('/')->with('success', 'Login Successful');
-        }
-
-        return back()->withErrors([
-            'email' => 'The provided credentials do not match our records.',
-        ]);
     }
 
     public function signupShow(Request $req)
@@ -54,12 +39,29 @@ class AuthController extends Controller
         return redirect()->intended('/');
     }
 
-    public function logout(Request $request)
+    public function login(Request $req)
+    {
+        $req->validate([
+            'email' => 'required|email',
+            'password' => 'required',
+        ]);
+
+        if (Auth::attempt($req->only('email', 'password'))) {
+            $req->session()->regenerate();
+            return redirect()->intended('/')->with('success', 'Login Successful');
+        }
+
+        return back()->withErrors([
+            'email' => 'The provided credentials do not match our records.',
+        ]);
+    }
+
+    public function logout(Request $req)
     {
         Auth::logout();
 
-        $request->session()->invalidate();
-        $request->session()->regenerateToken();
+        $req->session()->invalidate();
+        $req->session()->regenerateToken();
 
         return redirect('/');
     }

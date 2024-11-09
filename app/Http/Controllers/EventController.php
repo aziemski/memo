@@ -7,6 +7,7 @@ use App\Models\Event;
 use Carbon\Carbon;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+
 class EventController extends Controller
 {
 
@@ -30,7 +31,7 @@ class EventController extends Controller
             $startDate = Carbon::parse($event->start_date);
             $endDate = Carbon::parse($event->end_date);
 
-            $text =  $event->description;
+            $text = $event->description;
             $categories = $event->categories;
 
             if (!empty($categories)) {
@@ -89,14 +90,6 @@ class EventController extends Controller
         ));
     }
 
-
-    public function create()
-    {
-        $categories = Category::all();
-
-        return view('events.create', compact('categories'));
-    }
-
     public function store(Request $req)
     {
         $req->validate([
@@ -124,11 +117,12 @@ class EventController extends Controller
 
         return redirect()->route('home');
     }
-    public function delete(Event $event)
-    {
-        $event->delete();
 
-        return redirect()->route('home');
+    public function create()
+    {
+        $categories = Category::all();
+
+        return view('events.create', compact('categories'));
     }
 
     public function edit(Event $event)
@@ -166,6 +160,13 @@ class EventController extends Controller
 
         $event->categories()
             ->sync($request->input('categories', []));
+
+        return redirect()->route('home');
+    }
+
+    public function delete(Event $event)
+    {
+        $event->delete();
 
         return redirect()->route('home');
     }

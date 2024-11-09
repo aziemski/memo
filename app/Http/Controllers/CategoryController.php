@@ -3,8 +3,8 @@
 namespace App\Http\Controllers;
 
 use App\Models\Category;
-use Illuminate\Http\Request;
 use Illuminate\Database\QueryException;
+use Illuminate\Http\Request;
 
 
 class CategoryController extends Controller
@@ -44,6 +44,7 @@ class CategoryController extends Controller
                 ->withErrors(['error' => 'An error occurred while adding the category.']);
         }
     }
+
     public function edit($id)
     {
         $category = Category::findOrFail($id);
