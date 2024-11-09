@@ -15,6 +15,9 @@ class Event extends Model
         , 'end_date'
         , 'description'
         , 'image_url'
+        , 'created_by'
+        , 'image_url'
+        , 'updated_by'
     ];
 
     public function categories()

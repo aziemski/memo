@@ -115,6 +115,8 @@ class EventController extends Controller
             'end_date' => $req->input('end_date'),
             'description' => $req->input('description'),
             'image_url' => $req->input('image_url'),
+            'created_by' => auth()->id(),
+            'updated_by' => auth()->id(),
         ]);
 
         $event->categories()
@@ -159,6 +161,7 @@ class EventController extends Controller
             'end_date' => $request->input('end_date'),
             'description' => $request->input('description'),
             'image_url' => $request->input('image_url'),
+            'updated_by' => auth()->id(),
         ]);
 
         $event->categories()
