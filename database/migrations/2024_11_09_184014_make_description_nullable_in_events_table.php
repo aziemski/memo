@@ -9,14 +9,14 @@ return new class extends Migration {
     public function up(): void
     {
         Schema::table('events', function (Blueprint $table) {
-            $table->text('description')->nullable()->change(); // Make description column nullable
+            $table->text('description')->nullable()->change();
         });
     }
 
     public function down(): void
     {
         Schema::table('events', function (Blueprint $table) {
-            $table->text('description')->nullable(false)->change(); // Revert back to NOT NULL if rolled back
+            $table->text('description')->nullable(false)->change();
         });
     }
 };

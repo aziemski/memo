@@ -15,9 +15,11 @@
                         <h5>{{ $event['text']['headline'] }}</h5>
                         <div class="event-description">{!! $event['text']['text'] !!}</div>
                         <small>
-                            Start: {{ $event['start_date']['year'] }}-{{ $event['start_date']['month'] }}-{{ $event['start_date']['day'] }}
+                            Start: {{ $event['start_date']['year'] }}-{{ $event['start_date']['month'] }}
+                            -{{ $event['start_date']['day'] }}
                             @if(!empty($event['end_date']))
-                                | End: {{ $event['end_date']['year'] }}-{{ $event['end_date']['month'] }}-{{ $event['end_date']['day'] }}
+                                | End: {{ $event['end_date']['year'] }}-{{ $event['end_date']['month'] }}
+                                -{{ $event['end_date']['day'] }}
                             @endif
                         </small>
                     </li>
