@@ -1,1 +1,7 @@
 @import 'bootstrap/dist/css/bootstrap.min.css';
+
+@media print {
+    .navbar {
+        display: none !important;
+    }
+}
