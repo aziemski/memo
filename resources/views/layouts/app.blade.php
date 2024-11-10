@@ -72,6 +72,11 @@
         </ul>
 
         <ul class="navbar-nav ms-auto">
+            @if(Route::is('home'))
+                <li class="nav-item">
+                    <button id="toggleViewBtn" class="nav-link btn btn-sm">List</button>
+                </li>
+            @endif
             <li class="nav-item">
                 @if (Auth::check())
                     <a href="{{ route('users.me') }}" class="nav-link btn btn-primary">Me</a>
